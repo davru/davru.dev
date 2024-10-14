@@ -1,0 +1,27 @@
+[
+  {
+    "slug": "exploring-the-power-of-bun",
+    "date": 1696174765000,
+    "tags": ["Bun", "JavaScript", "Node", "Deno"],
+    "summary": "Will be published on the 5th of August ✨",
+    "title": "Exploring the power of Bun 🧅",
+    "meta": [
+      {
+        "property": "og:url",
+        "content": "https://davru.dev/blog/first-blog-post"
+      },
+      {
+        "property": "og:image",
+        "content": "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post.jpeg"
+      },
+      {
+        "property": "twitter:url",
+        "content": "https://davru.dev/blog/first-blog-post"
+      },
+      {
+        "name": "twitter:image",
+        "content": "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post.jpeg"
+      }
+    ]
+  }
+]

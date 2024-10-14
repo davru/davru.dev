@@ -1,0 +1,133 @@
+---
+import type { BlogPost } from "@lib/models";
+
+// Example: import the "fs/promises" builtin from Node.js
+import fs from 'node:fs/promises';
+import Layout from "../layouts/Layout.astro";
+
+const url = new URL('../../public/posts.json', import.meta.url);
+const json = await fs.readFile(url, 'utf-8');
+const posts = JSON.parse(json) as BlogPost[];
+---
+
+<Layout title="Blog - David (davru) Sanchez">
+	<div class="blog-list__wrapper">
+	  {posts.map((post) => (
+	    <div class="blog-list__post">
+	      <header>
+	        <a href={`/blog/${post.slug}`} class="blog-list__post_title">
+	          <h3>{post.title}</h3>
+	        </a>
+	        <time>{post.date.toLocaleString('en')}</time>
+	      </header>
+
+	      <main>{post.summary}</main>
+
+	      <footer>
+	        <div class="blog-list__post_footer__more">
+	          <time>{post.date.toLocaleString('en')}</time>
+	          <a href={`/blog/${post.slug}`} class="blog-list__post_footer__read-more">read more...</a>
+	        </div>
+
+	        {post.tags && (
+	          <app-tag-list
+	            tags={post.tags}
+	            style={{ color: 'var(--color-text-main)', fontSize: '.8em', float: 'right' }}
+	            backgroundColor="var(--color-text-main)"
+	          />
+	        )}
+	      </footer>
+	    </div>
+	  ))}
+	</div>
+</Layout>
+
+<style>
+	.blog-list__wrapper {
+	  margin: 0 auto;
+	  padding: 10.5rem 1.75rem 5rem 1.75rem;
+	  max-width: 100%;
+	  width: 700px;
+	  color: var(--text-color);
+	}
+
+	.blog-list__wrapper time {
+	  font-size: .85em;
+	  color: var(--color-text-secondary);
+	}
+
+	.blog-list__post header {
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	  margin-bottom: 1.5em;
+	}
+
+	.blog-list__post header h3 {
+	  font-size: 1.35em;
+	}
+
+	.blog-list__post header time {
+	  display: none;
+	}
+
+	.blog-list__post main {
+	  font-size: .9em;
+	  line-height: 1.5em;
+	  margin-bottom: 1.75em;
+	}
+
+	.blog-list__post footer {
+	  display: flex;
+	  flex-direction: column-reverse;
+	  align-items: flex-start;
+	}
+
+	.blog-list__post footer time {
+	  display: block;
+	}
+
+	.blog-list__post_footer__more {
+	  width: 100%;
+	  margin-top: 1.25rem;
+	  display: flex;
+	  justify-content: space-between;
+	  align-items: center;
+	}
+
+	.blog-list__post_footer__read-more {
+	  font-size: .85em;
+	  color: var(--color-text-main);
+	  font-weight: bold;
+	}
+
+	@media (min-width: 600px) {
+	  .blog-list__post footer {
+	    flex-direction: row;
+	    justify-content: space-between;
+	    align-items: flex-end;
+	    gap: 1em;
+	  }
+
+	  .blog-list__post footer time {
+	    display: none;
+	  }
+
+  	.blog-list__wrapper {
+	    padding: 11.5rem 2.2rem 5rem 2.2rem;
+	  }
+
+	  .blog-list__post header .blog-list__post_title:hover {
+	    text-decoration: overline;
+	  }
+
+	  .blog-list__post header time {
+	    display: block;
+	  }
+
+	  .blog-list__post_footer__more {
+	    width: auto;
+	    margin-top: 0;
+	  }
+	}
+</style>
