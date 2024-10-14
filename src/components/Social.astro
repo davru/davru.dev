@@ -1,0 +1,183 @@
+<div class="social-links">
+  <ul class="social-icons-list">
+    <li class="social-icon">
+      <a
+        href="https://github.com/davru"
+        aria-label="GitHub"
+        target="_blank"
+        rel="noreferrer"
+        class="social-icon__link"
+      >
+        <span class="social-icon__link__text">Github</span>
+        <svg
+        	width="24"
+        	height="24"
+        	viewBox="0 0 24 24"
+        	fill="none"
+         	stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon"
+        >
+        	<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+         	<path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+        </svg>
+      </a>
+    </li>
+    <li class="social-icon">
+      <a
+        href="https://x.com/davrudev"
+        aria-label="Email"
+        target="_blank"
+        rel="noreferrer"
+        class="social-icon__link"
+      >
+        <span class="social-icon__link__text">Twitter</span>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon"
+        >
+          <polygon
+            class="st0"
+            points="21.3,21.1 9.9,2.9 2.7,2.9 14.1,21.1"
+          />
+          <line class="st0" x1="2.7" y1="21.1" x2="9.9" y2="14.5" />
+          <line class="st0" x1="14.1" y1="9.5" x2="21.3" y2="2.9" />
+        </svg>
+      </a>
+    </li>
+    <li class="social-icon">
+      <a
+        href="https://linkedin.com/in/davru"
+        aria-label="Linkedin"
+        target="_blank"
+        rel="noreferrer"
+        class="social-icon__link"
+      >
+        <span class="social-icon__link__text">Linkedin</span>
+        <svg
+        	xmlns="http://www.w3.org/2000/svg"
+         	width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon"
+        >
+        	<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+         	<rect x="2" y="9" width="4" height="12"></rect>
+         	<circle cx="4" cy="4" r="2"></circle>
+        </svg>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<style>
+  .social-links {
+  	position: fixed;
+    bottom: 0;
+    left: 0em;
+    width: 30px;
+    margin: 0 1.6em;
+    color: var(--text-color);
+  }
+
+  .social-links .social-icons-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .social-links .social-icons-list::after {
+    content: "";
+    display: block;
+    width: 1px;
+    height: 80px;
+    margin: 0 auto;
+    background-color: var(--text-color);
+  }
+
+  .social-links .social-icons-list .social-icon:last-child {
+    margin-bottom: 1em;
+  }
+
+  .social-links .social-icons-list .social-icon__link {
+    display: inline-block;
+    padding: 0.6em 0;
+  }
+
+  .social-links .social-icons-list .social-icon__link__text {
+    clip-path: inset(100%);
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+  .social-links .social-icons-list .icon {
+    max-width: 1.4em;
+    transition: all 0.2s ease;
+    stroke: var(--text-color);
+  }
+
+  .social-links .social-icons-list .icon[name="linkedin"] {
+    stroke: transparent;
+    fill: var(--text-color);
+  }
+
+  @media (min-width: 600px) {
+    .social-links .social-icons-list .social-icon__link:hover .icon {
+      color: var(--color-text-main);
+    }
+
+    .social-links .social-icons-list .social-icon__link:hover .icon:not([name="linkedin"]) {
+      stroke: var(--color-text-main);
+    }
+
+    .social-links .social-icon__link:hover .icon[name="linkedin"] {
+      fill: var(--color-text-main);
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .social-links {
+      position: absolute;
+      margin: 0;
+      padding-bottom: 1em;
+      width: 100%;
+    }
+
+    .social-links .social-icons-list {
+      width: 100%;
+      justify-content: center;
+      display: flex;
+      flex-direction: row;
+      gap: 2em;
+    }
+
+    .social-links .social-icons-list::after {
+      display: none;
+    }
+
+    .social-links .social-icons-list .social-icon:last-child {
+      margin-bottom: 0;
+    }
+  }
+</style>
