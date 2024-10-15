@@ -1,0 +1,153 @@
+---
+import type { BlogPost } from '@lib/models';
+import { relativeTime } from '@lib/utils';
+import Layout from "./Layout.astro";
+import { getPosts } from "@lib/utils";
+
+const { url } = Astro.request;
+
+const posts = getPosts();
+const slug = url.split('/').filter(Boolean).pop();
+const post = posts.find(p => p.slug === slug);
+---
+
+<Layout title={`${post?.title} - David (davru) Sanchez`} >
+	<div class="blog-post__wrapper">
+    <article *ngIf="post; else error">
+      <header>
+        <h1 class="blog-post__title">{ post?.title }</h1>
+
+        <div class="blog-post__details">
+        	<!-- TODO tags -->
+
+          <time>{ relativeTime(post?.date) }</time>
+        </div>
+      </header>
+
+      <main id="mdx">
+       	<slot />
+      </main>
+    </article>
+  </div>
+</Layout>
+
+<style>
+	.blog-post__wrapper > article {
+	  margin: 0 auto;
+	  padding: 8rem 1.75rem 5rem 1.75rem;
+	  color: var(--text-color);
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	}
+
+	header {
+	  width: 700px;
+	  max-width: 100%;
+	  display: flex;
+	  justify-content: flex-end;
+	  flex-direction: column;
+	  margin-bottom: 1.75em;
+	}
+
+	h1 {
+	  font-size: 1.4em;
+	  margin: 2rem 0;
+	  align-self: start;
+	}
+
+	.blog-post__details {
+	  display: flex;
+	  flex-direction: column-reverse;
+	}
+
+	@media (min-width: 600px) {
+	  .blog-post__wrapper > article {
+      padding: 9rem 2.2rem 5rem 2.2rem;
+	  }
+
+	  h1 {
+      font-size: 1.65em;
+	  }
+
+	  .blog-post__details {
+      flex-direction: row;
+      justify-content: space-between;
+	  }
+
+	  .blog-post__details time {
+      margin-bottom: 0;
+      font-size: .95em;
+	  }
+	}
+</style>
+<style is:global>
+	#mdx {
+	  font-size: .9rem;
+	  line-height: 1.75;
+	  display: flex;
+	  flex-direction: column;
+	  align-items: center;
+	  max-width: 100%;
+	}
+
+	#mdx * {
+	  font-family: var(--system-fonts);
+	}
+
+	#mdx pre *,
+	#mdx code {
+	  font-family: var(--default-fonts);
+	  line-height: 1.25;
+	  font-size: .9rem;
+	}
+
+	#mdx > * {
+	  width: 700px;
+	  max-width: 100%;
+	}
+
+	#mdx p:has(img[alt*="CAPTION"]) {
+	  width: 900px;
+	  margin-bottom: 2em;
+	}
+
+	#mdx img {
+	  max-width: 100%;
+	}
+
+	#mdx a {
+	  color: var(--color-text-main);
+	}
+
+	#mdx pre[class*='language'] + div {
+	  opacity: 100 !important;
+	  top: 1.6em !important;
+	  right: 1em !important;
+	}
+
+	#mdx code:not([class*='language-']) {
+	  color: white;
+	  font-size: .8rem;
+	  background-color: var(--selection);
+	  padding: 2px 5px;
+	  border-radius: 0.5em;
+	  font-weight: unset !important;
+	  vertical-align: text-top;
+	}
+
+	#mdx code.language-bash::before {
+	  content: '$ ';
+	  color: var(--color-text-secondary);
+	}
+
+	@media (min-width: 600px) {
+	  #mdx {
+      font-size: 1rem;
+	  }
+
+	  #mdx a:hover {
+      text-decoration: underline;
+	  }
+	}
+</style>

@@ -1,13 +1,8 @@
 ---
-import type { BlogPost } from "@lib/models";
+import Layout from "@layouts/Layout.astro";
+import { getPosts, relativeTime } from "@lib/utils";
 
-// Example: import the "fs/promises" builtin from Node.js
-import fs from 'node:fs/promises';
-import Layout from "../layouts/Layout.astro";
-
-const url = new URL('../../public/posts.json', import.meta.url);
-const json = await fs.readFile(url, 'utf-8');
-const posts = JSON.parse(json) as BlogPost[];
+const posts = getPosts()
 ---
 
 <Layout title="Blog - David (davru) Sanchez">
@@ -15,10 +10,10 @@ const posts = JSON.parse(json) as BlogPost[];
 	  {posts.map((post) => (
 	    <div class="blog-list__post">
 	      <header>
-	        <a href={`/blog/${post.slug}`} class="blog-list__post_title">
-	          <h3>{post.title}</h3>
-	        </a>
-	        <time>{post.date.toLocaleString('en')}</time>
+					<h3>
+	        	<a href={`/blog/${post.slug}`} class="blog-list__post_title">{ post.title }</a>
+	        </h3>
+	        <time>{ relativeTime(post.date) }</time>
 	      </header>
 
 	      <main>{post.summary}</main>
@@ -44,16 +39,20 @@ const posts = JSON.parse(json) as BlogPost[];
 
 <style>
 	.blog-list__wrapper {
-	  margin: 0 auto;
-	  padding: 10.5rem 1.75rem 5rem 1.75rem;
+		margin-top: 2rem;
+	  padding: 8rem 1.75rem 5rem 1.75rem;
 	  max-width: 100%;
-	  width: 700px;
 	  color: var(--text-color);
 	}
 
 	.blog-list__wrapper time {
 	  font-size: .85em;
 	  color: var(--color-text-secondary);
+	}
+
+	.blog-list__post {
+  	width: 700px;
+	  margin: 0 auto;
 	}
 
 	.blog-list__post header {
@@ -64,7 +63,7 @@ const posts = JSON.parse(json) as BlogPost[];
 	}
 
 	.blog-list__post header h3 {
-	  font-size: 1.35em;
+	  font-size: 1.4em;
 	}
 
 	.blog-list__post header time {
@@ -102,6 +101,10 @@ const posts = JSON.parse(json) as BlogPost[];
 	}
 
 	@media (min-width: 600px) {
+		.blog-list__post header h3 {
+		  font-size: 1.65em;
+		}
+
 	  .blog-list__post footer {
 	    flex-direction: row;
 	    justify-content: space-between;
@@ -114,7 +117,7 @@ const posts = JSON.parse(json) as BlogPost[];
 	  }
 
   	.blog-list__wrapper {
-	    padding: 11.5rem 2.2rem 5rem 2.2rem;
+   		padding: 9rem 2.2rem 5rem 2.2rem;
 	  }
 
 	  .blog-list__post header .blog-list__post_title:hover {

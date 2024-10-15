@@ -1,7 +1,6 @@
 // @ts-check
-import { defineConfig, envField } from 'astro/config';
-
 import mdx from '@astrojs/mdx';
+import { defineConfig, envField } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
