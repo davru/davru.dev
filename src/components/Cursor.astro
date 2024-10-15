@@ -1,0 +1,145 @@
+<div id="cursor">
+  <div class="bubble"></div>
+</div>
+
+<script is:inline type="module">
+  const cursor = document.querySelector("#cursor");
+  const cursorSize = { height: 75, width: 75 };
+  let cursorPosition = { x: -100, y: -100 };
+
+  const updateCursor = () => {
+    cursor.style.left = (cursorPosition.x - cursorSize.width / 2) + 'px';
+    cursor.style.top = (cursorPosition.y + window.scrollY - cursorSize.height / 2) + 'px';
+  }
+
+  if (localStorage.getItem('cursorPosition')) {
+    cursorPosition = JSON.parse(localStorage.getItem('cursorPosition'));
+    updateCursor()
+  }
+
+  document.addEventListener('mousemove', (event) => {
+    cursorPosition = {
+      x: event.pageX,
+      y: event.clientY
+    };
+    updateCursor();
+    localStorage.setItem('cursorPosition', JSON.stringify(cursorPosition));
+  });
+
+  document.addEventListener('scroll', () => updateCursor());
+
+  document.addEventListener('mousedown', () => {
+    cursor.classList.add('expand');
+  });
+
+  document.addEventListener('mouseup', () => {
+    cursor.classList.add('deexpand');
+    setTimeout(() => {
+      cursor.classList.remove('expand');
+      cursor.classList.remove('deexpand');
+    }, 100); // Match this duration with the animation duration
+  });
+
+  document.addEventListener('mouseover', (e) => {
+    if (!cursor.classList.contains('show')) {
+      cursor.classList.add('show');
+    }
+
+    const target = e.target;
+
+    if (target) {
+      const link = target.nodeName === 'A' && !!target.getAttribute('href');
+
+      if (link) {
+        cursor.children[0].classList.add('pulse');
+      } else {
+        cursor.children[0].classList.remove('pulse');
+      }
+    } else {
+      cursor.children[0].classList.remove('pulse');
+    }
+  });
+</script>
+
+<style>
+  #cursor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 75px;
+    position: absolute;
+    pointer-events: none;
+    z-index: 99999;
+    top: -100px;
+    left: -100px;
+  }
+
+  #cursor .bubble {
+    display: flex;
+    width: 15px;
+    height: 15px;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-text-main);
+    color: white;
+    border-radius: 50%;
+    opacity: .9;
+    transition: width .25s ease, height .25s ease;
+  }
+
+  #cursor .bubble.pulse {
+    width: 25px;
+    height: 25px;
+    animation: pulse-animation 1.5s infinite;
+  }
+
+  .expand:not(:has(.pulse)) {
+    animation: cursorPulse .1s ease-in-out 0s forwards;
+  }
+
+  .deexpand:not(:has(.pulse)) {
+    animation: cursorPulseOut .1s ease-in-out 0s backwards;
+  }
+
+  @keyframes cursorPulse {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(2);
+      opacity: .5;
+    }
+  }
+
+  @keyframes cursorPulseOut {
+    0% {
+    	transform: scale(2);
+      opacity: .5;
+    }
+    100% {
+    	transform: scale(1);
+    }
+  }
+
+  @keyframes pulse-animation {
+    0% {
+      box-shadow: 0 0 0 0px rgba(255, 105, 193, 0.5);
+    }
+    30% {
+      box-shadow: 0 0 0 15px rgba(255, 105, 193, 0);
+    }
+    31% {
+      box-shadow: 0 0 0 0px rgba(255, 105, 193, 0.5);
+    }
+    100% {
+      box-shadow: 0 0 0 15px rgba(255, 105, 193, 0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    #cursor {
+      display: none;
+    }
+  }
+</style>
