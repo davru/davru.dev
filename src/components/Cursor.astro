@@ -41,10 +41,6 @@
   });
 
   document.addEventListener('mouseover', (e) => {
-    if (!cursor.classList.contains('show')) {
-      cursor.classList.add('show');
-    }
-
     const target = e.target;
 
     if (target) {
@@ -59,6 +55,11 @@
       cursor.children[0].classList.remove('pulse');
     }
   });
+
+  window.addEventListener("blur", () => {
+    cursorPosition = { x: -100, y: -100 };
+    updateCursor();
+  })
 </script>
 
 <style>
@@ -85,7 +86,7 @@
     color: white;
     border-radius: 50%;
     opacity: .9;
-    transition: width .25s ease, height .25s ease;
+    transition: width .25s ease, height .25s ease, opacity .25s ease;
   }
 
   #cursor .bubble.pulse {

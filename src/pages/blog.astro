@@ -1,7 +1,8 @@
 ---
+import TagList from "@components/TagList.astro";
+import TagList from "@components/TagList.astro";
 import Layout from "@layouts/Layout.astro";
 import { getPosts, relativeTime } from "@lib/utils";
-
 const posts = getPosts()
 ---
 
@@ -24,13 +25,7 @@ const posts = getPosts()
 	          <a href={`/blog/${post.slug}`} class="blog-list__post_footer__read-more">read more...</a>
 	        </div>
 
-	        {post.tags && (
-	          <app-tag-list
-	            tags={post.tags}
-	            style={{ color: 'var(--color-text-main)', fontSize: '.8em', float: 'right' }}
-	            backgroundColor="var(--color-text-main)"
-	          />
-	        )}
+	        <TagList tags={post.tags}></TagList>
 	      </footer>
 	    </div>
 	  ))}
