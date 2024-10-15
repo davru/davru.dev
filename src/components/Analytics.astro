@@ -1,0 +1,13 @@
+---
+const aptabase_key = import.meta.env.PUBLIC_APTABASE_KEY
+---
+
+<script is:inline type="module" define:vars={{ aptabase_key }}>
+	import { init, trackEvent } from '/node_modules/@aptabase/web';
+
+	init(aptabase_key);
+
+	trackEvent('visit', {
+		path: location.pathname
+	})
+</script>

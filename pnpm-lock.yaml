@@ -8,13 +8,16 @@ importers:
 
   .:
     dependencies:
+      '@aptabase/web':
+        specifier: ^0.4.3
+        version: 0.4.3
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(typescript@5.6.3)
       '@astrojs/mdx':
         specifier: ^3.1.8
         version: 3.1.8(astro@4.16.3(rollup@4.24.0)(typescript@5.6.3))
-      '@fontsource/roboto-mono':
+      '@fontsource-variable/roboto-mono':
         specifier: ^5.1.0
         version: 5.1.0
       astro:
@@ -36,6 +39,9 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@aptabase/web@0.4.3':
+    resolution: {integrity: sha512-IcFGvgEcc26chrRDmnOxzH/HLeNexrAoDx2DjNFAoTjfZCSJmxrABqseVLlTI7JeGKfDdIVI+IC3AWj5v+2J0A==}
 
   '@astrojs/check@0.9.4':
     resolution: {integrity: sha512-IOheHwCtpUfvogHHsvu0AbeRZEnjJg3MopdLddkJE70mULItS/Vh37BHcI00mcOJcH1vhD3odbpvWokpxam7xA==}
@@ -334,8 +340,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@fontsource/roboto-mono@5.1.0':
-    resolution: {integrity: sha512-7lIxTeanF2XrwAIukUrOUvO9veGkQiG7L7vizMxVjl+lrTwS4GAYyOvziyGZ6/3kU80K3lGd/FnWrmoTud0V6A==}
+  '@fontsource-variable/roboto-mono@5.1.0':
+    resolution: {integrity: sha512-87USlDpEi7dS/ayPXwf/08vdgJKEYxdQmuZk5kCzWBtumimdwWlA9Vh36TCtYqFC+dGgDxPX/4PJK+0lxkEd5A==}
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -2245,6 +2251,8 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
+  '@aptabase/web@0.4.3': {}
+
   '@astrojs/check@0.9.4(typescript@5.6.3)':
     dependencies:
       '@astrojs/language-server': 2.15.0(typescript@5.6.3)
@@ -2577,7 +2585,7 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@fontsource/roboto-mono@5.1.0': {}
+  '@fontsource-variable/roboto-mono@5.1.0': {}
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:

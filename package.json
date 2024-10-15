@@ -10,9 +10,10 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@aptabase/web": "^0.4.3",
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^3.1.8",
-    "@fontsource/roboto-mono": "^5.1.0",
+    "@fontsource-variable/roboto-mono": "^5.1.0",
     "astro": "^4.16.3",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.6.3"

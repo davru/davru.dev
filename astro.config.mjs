@@ -1,9 +1,19 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from 'astro/config';
 
-import mdx from "@astrojs/mdx";
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()],
+  experimental: {
+    env: {
+      schema: {
+        PUBLIC_APTABASE_KEY: envField.string({
+          context: 'client',
+          access: 'public'
+        })
+      }
+    }
+  },
+  integrations: [mdx()]
 });
