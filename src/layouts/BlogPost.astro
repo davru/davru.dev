@@ -12,15 +12,15 @@ const slug = url.split('/').filter(Boolean).pop();
 const post = posts.find(p => p.slug === slug);
 ---
 
-<Layout title={`${post?.title} - David (davru) Sanchez`} >
+<Layout title={`${post?.title} - David (davru) Sanchez`} description={post?.summary ?? ''}>
 	<div class="blog-post__wrapper">
     <article *ngIf="post; else error">
       <header>
         <h1 class="blog-post__title">{ post?.title }</h1>
 
         <div class="blog-post__details">
-        	<TagList tags={post.tags}></TagList>
           <time>{ relativeTime(post?.date) }</time>
+        	<TagList tags={post?.tags ?? []}></TagList>
         </div>
       </header>
 
@@ -50,15 +50,22 @@ const post = posts.find(p => p.slug === slug);
 	  margin-bottom: 1.75em;
 	}
 
-	h1 {
-	  font-size: 1.4em;
-	  margin: 2rem 0;
+	.blog-post__title {
+		text-align: justify;
+ 		font-size: 1.25rem;
+	  margin: 1.5rem 0;
 	  align-self: start;
 	}
 
 	.blog-post__details {
-	  display: flex;
-	  flex-direction: column-reverse;
+		display: flex;
+		flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+	}
+
+  .blog-post__details time {
+    font-size: .8em;
 	}
 
 	@media (min-width: 600px) {
@@ -66,49 +73,34 @@ const post = posts.find(p => p.slug === slug);
       padding: 9rem 2.2rem 5rem 2.2rem;
 	  }
 
-	  h1 {
-      font-size: 1.65em;
-	  }
+		.blog-post__details {
+			align-items: center;
+		}
 
-	  .blog-post__details {
-      flex-direction: row;
-      justify-content: space-between;
-	  }
-
-	  .blog-post__details time {
-      margin-bottom: 0;
-      font-size: .95em;
+	  .blog-post__title {
+      font-size: 1.5rem;
 	  }
 	}
 </style>
 <style is:global>
 	#mdx {
-	  font-size: .9rem;
+	  font-size: 0.8rem;
 	  line-height: 1.75;
-	  display: flex;
-	  flex-direction: column;
-	  align-items: center;
 	  max-width: 100%;
 	}
 
 	#mdx * {
-	  font-family: var(--system-fonts);
-	}
-
-	#mdx pre *,
-	#mdx code {
-	  font-family: var(--default-fonts);
-	  line-height: 1.25;
-	  font-size: .9rem;
+		font-family: var(--default-fonts);
 	}
 
 	#mdx > * {
 	  width: 700px;
 	  max-width: 100%;
+		margin: 0 auto;
 	}
 
 	#mdx p:has(img[alt*="CAPTION"]) {
-	  width: 900px;
+	  width: 800px;
 	  margin-bottom: 2em;
 	}
 
@@ -120,34 +112,167 @@ const post = posts.find(p => p.slug === slug);
 	  color: var(--color-text-main);
 	}
 
-	#mdx pre[class*='language'] + div {
-	  opacity: 100 !important;
-	  top: 1.6em !important;
-	  right: 1em !important;
+	#mdx ul {
+		padding-left: 1.65rem;
 	}
 
-	#mdx code:not([class*='language-']) {
-	  color: white;
-	  font-size: .8rem;
-	  background-color: var(--selection);
-	  padding: 2px 5px;
-	  border-radius: 0.5em;
-	  font-weight: unset !important;
-	  vertical-align: text-top;
+	#mdx *:not(pre) > code {
+		background: var(--bg-secondary-color);
+		border-radius: 0.25rem;
+		padding: .1rem .3rem;
 	}
 
-	#mdx code.language-bash::before {
-	  content: '$ ';
-	  color: var(--color-text-secondary);
+	#mdx pre.astro-code {
+		position: relative;
+		padding: 1.1rem 1.3rem;
+		border-radius: 0.5rem;
 	}
+
+	#mdx > pre.astro-code {
+		padding: 1.1rem 1.75rem;
+		width: 100vw;
+		width: 100dvw;
+    max-width: none;
+    margin-left: -1.75rem;
+    border-radius: 0;
+	}
+
+	#mdx code, #mdx code .line > * {
+  	font-family: var(--default-fonts);
+	  font-size: .85rem;
+	}
+
+	#mdx pre.astro-code .copy {
+		display: none;
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		width: 2.5rem;
+		height: 2.5rem;
+		border: none;
+		border-radius: 0.5rem;
+		background: var(--bg-secondary-color);
+		color: white;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		opacity: 0;
+		transition: opacity 0.2s ease-in-out;
+	}
+
+	#mdx pre.astro-code .copy .copy-success {
+		display: none;
+	}
+	#mdx pre.astro-code .copy.copied .copy-success {
+		display: block;
+	}
+	#mdx pre.astro-code .copy.copied .copy-default {
+		display: none;
+	}
+
+	#mdx pre.astro-code:hover .copy {
+		opacity: 1;
+	}
+
+	#mdx pre[data-language]::before {
+		display: none;
+		content: '';
+		position: absolute;
+		top: 0.65rem;
+		right: 1rem;
+		font-size: 0.85rem;
+		color: var(--color-text-secondary);
+	} #mdx pre[data-language="astro"]::before {
+		content: 'astro';
+	} #mdx pre[data-language="bash"]::before {
+		content: 'bash';
+	} #mdx pre[data-language="css"]::before {
+		content: 'css';
+	} #mdx pre[data-language="html"]::before {
+		content: 'html';
+	} #mdx pre[data-language="js"]::before {
+		content: 'js';
+	} #mdx pre[data-language="json"]::before {
+		content: 'json';
+	} #mdx pre[data-language="markdown"]::before {
+		content: 'md';
+	} #mdx pre[data-language="php"]::before {
+		content: 'php';
+	} #mdx pre[data-language="python"]::before {
+		content: 'py';
+	} #mdx pre[data-language="ts"]::before {
+		content: 'ts';
+	}
+
+	#mdx h2 {	font-size: 1.2rem; }
+	#mdx h3 {	font-size: 1.1rem; }
+	#mdx h4 {	font-size: 1rem; }
+	#mdx h5 {	font-size: 0.9rem; }
 
 	@media (min-width: 600px) {
 	  #mdx {
-      font-size: 1rem;
+		  font-size: 0.9rem;
 	  }
+
+		#mdx h2 {	font-size: 1.4rem; }
+		#mdx h3 {	font-size: 1.3rem; }
+		#mdx h4 {	font-size: 1.2rem; }
+		#mdx h5 {	font-size: 1.1rem; }
 
 	  #mdx a:hover {
       text-decoration: underline;
 	  }
+
+		#mdx pre.astro-code {
+			width: calc(700px + 2.6rem);
+			max-width: 100%;
+			margin: 0 auto;
+			padding: 1.1rem 1.3rem;
+			border-radius: 0.5rem;
+		}
+
+		#mdx pre.astro-code .copy {
+			display: flex;
+		}
+
+		#mdx pre[data-language]::before {
+			display: block;
+		}
+	}
+
+	/* MARGINS */
+	#mdx p {
+		margin-top: 1.3rem;
+		margin-bottom: .6rem;
+	}
+
+	#mdx pre.astro-code {
+		margin-top: 1rem;
+		margin-bottom: 1.5rem;
+	}
+
+	#mdx li {
+		margin-top: .6rem;
+		margin-bottom: .6rem;
+	}
+
+	#mdx h1,
+	#mdx h2,
+	#mdx h3,
+	#mdx h4,
+	#mdx h5,
+	#mdx h6 {
+		font-family: var(--default-fonts);
+		margin-bottom: .6rem;
+    margin-top: 1.5rem;
+	}
+
+	#mdx h1 + p,
+	#mdx h2 + p,
+	#mdx h3 + p,
+	#mdx h4 + p,
+	#mdx h5 + p,
+	#mdx h6 + p {
+    margin-top: 0;
 	}
 </style>

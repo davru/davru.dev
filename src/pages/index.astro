@@ -2,7 +2,7 @@
 import Layout from '@layouts/Layout.astro';
 ---
 
-<Layout title="David (davru) Sanchez - Fullstack web developer">
+<Layout title="David (davru) Sanchez" description="Full-stack web developer crafting engaging, high-performance web apps with a focus on design and seamless user experiences.">
   <section class="about">
     <header class="about-header">
       <span>Hi, my name is</span>
@@ -10,22 +10,22 @@ import Layout from '@layouts/Layout.astro';
       <h3>I create solutions for the web.</h3>
     </header>
     <article class="about-resume">
-      <p>I'm a web developer focused on creating engaging and interactive experiences. I have a strong eye for design and a deep understanding of optimizing web apps thanks to my experience working with different technologies.</p>
-      <p>Just a <span>JavaScript</span> lover with a focus on creativity and results, always seeking new challenges to grow my skills. Currently working for <span>Innovation Group</span>.</p>
+      <p>I'm a full-stack web developer who loves turning ideas into interactive, user-friendly experiences. With a passion for clean design and performance, I build web apps that not only look great but run smoothly.</p>
+      <p>A <span>JavaScript</span> enthusiast, I’m always exploring new tools and challenges to keep pushing my skills forward. Currently honing my craft at <span>Innovation Group</span>.</p>
     </article>
   </section>
 </Layout>
 
 <style>
 	.about {
-		height: 100vh;
-		height: 100dvh;
+		height: calc(100vh - 4rem);
+		height: calc(100dvh - 4rem);
 		display: flex;
     flex-direction: column;
     justify-content: center;
     max-width: 100%;
     width: 820px;
-    padding: 0 1.75rem;
+    padding: 4rem 1.75rem 0 1.75rem;
     margin: 0 auto;
     color: var(--text-color);
 	}
@@ -37,7 +37,7 @@ import Layout from '@layouts/Layout.astro';
 
   .about-header h2, .about-header h3 {
     margin-top: 1rem;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: var(--title-fonts);
     opacity: 0.95;
     font-size: clamp(1rem, 4.3rem, 10vw);
     text-indent: -0.15rem;
@@ -49,9 +49,8 @@ import Layout from '@layouts/Layout.astro';
   }
 
   .about-resume p, .about-resume span {
-    font-family: var(--system-fonts);
-    line-height: 1.75;
-    font-size: 0.9rem;
+    line-height: 1.5;
+    font-size: 0.85rem;
   }
 
   .about-resume p {
@@ -77,11 +76,11 @@ import Layout from '@layouts/Layout.astro';
 
   @media (min-width: 600px) {
   	.about {
-    	padding: 0 2.2rem;
+   		padding: 4rem 2.2rem 0 2.2rem;
     }
 
     .about-resume p, .about-resume span {
-    	font-size: 1rem;
+    	font-size: 0.95rem;
     }
   }
 </style>

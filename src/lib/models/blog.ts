@@ -4,6 +4,6 @@ export interface BlogPost {
   slug: string;
   summary: string;
   tags: string[];
-  date: number;
+  date: string;
   // meta: MetaDefinition[]; TODO meta tags
 }
