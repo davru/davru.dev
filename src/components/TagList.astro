@@ -7,7 +7,7 @@ const { tags } = Astro.props;
 ---
 
 <div class="tag-list__container" [ngStyle]="style">
-  {tags.map((tag: string) => (
+  {(tags ?? []).map((tag: string) => (
   	<span class="tag">{ tag }<span class="tag__background"></span></span>
   ))}
 </div>
@@ -39,6 +39,4 @@ const { tags } = Astro.props;
     border-radius: 0.1em;
     background-color: #ff69c1;
   }
-}
-
 </style>
