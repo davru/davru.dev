@@ -7,7 +7,9 @@ const UNITS: Record<string, number> = {
   second: 1000
 };
 
-export const relativeTime = (date: number = Date.now()): string | undefined => {
+export const relativeTime = (
+  date: string = new Date().toISOString()
+): string | undefined => {
   const rtf = new Intl.RelativeTimeFormat('en');
   const elapsed = new Date(date).getTime() - new Date().getTime();
 

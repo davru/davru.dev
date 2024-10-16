@@ -1,13 +1,19 @@
+---
+const { url } = Astro.request
+
+const path = new URL(url).pathname
+---
+
 <nav class="nav">
   <div class="nav-logo">
     <h1>davru</h1>
   </div>
   <div class="nav-links">
-    <a href="/" class="nav-link">
-      <span class="nav-link-number">01</span>home
+    <a href="/" class:list={["nav-link", { active: path == '/' }]}>
+      <span class="nav-link-number">01</span><span class="nav-link-text">home</span>
     </a>
-    <a href="/blog" class="nav-link">
-      <span class="nav-link-number">02</span>blog
+    <a href="/blog" class:list={["nav-link", { active: path == '/blog' }]}>
+      <span class="nav-link-number">02</span><span class="nav-link-text">blog</span>
     </a>
   </div>
 </nav>
@@ -68,8 +74,8 @@
 	    font-size: .95em;
     }
 
-    .nav-link:hover {
-      color: var(--color-text-main);
+    .nav-link:hover > .nav-link-text, .nav-link.active > .nav-link-text {
+      text-decoration: line-through;
     }
   }
 </style>
