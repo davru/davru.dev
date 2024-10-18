@@ -6,7 +6,7 @@ layout: ../../layouts/BlogPost.astro
 
 TypeScript has become an indispensable tool for modern frontend developers. It offers the flexibility of JavaScript while adding a powerful type system that can prevent bugs, improve code quality, and provide better tooling support. However, many developers only scratch the surface of TypeScript’s capabilities. In this blog post, we will explore five advanced TypeScript tips that will help you unlock its full potential. By using these tips, you can write more robust, maintainable, and scalable applications.
 
-## 1\. Type guards
+## 1\. Type Guards
 
 Type assertions (also known as type casting) are often used when developers want to tell TypeScript that they "know better" about a variable's type. However, relying on type assertions can lead to runtime errors if used incorrectly. A better approach is to use type guards.
 
@@ -28,7 +28,7 @@ function printValue(value: string | number) {
 
 By using type guards, you can avoid type assertions and let TypeScript safely infer the type, reducing the risk of runtime errors.
 
-## 2\. Immutable types
+## 2\. Immutable Types
 
 In many cases, ensuring immutability in your data structures is critical, especially in state management (such as using Redux or other frameworks). One simple yet powerful trick in TypeScript is to use the `as const` keyword.
 
@@ -52,7 +52,7 @@ const position = {
 // position.x = 15; // Error: Cannot assign to 'x' because it is a read-only property.
 ```
 
-## 3\. Type inferring with union types
+## 3\. Type inferring with Union Types
 
 When working with union types, it can be tricky to infer a type based on a condition. One powerful feature of TypeScript is the use of the `extends` keyword to create conditional types, which are types that change based on a condition.
 
@@ -79,7 +79,7 @@ const stringHolder = new ValueHolder<string>('Hello, TypeScript!');
 const inferredHolder = new ValueHolder('Inferred type!'); // T inferred as string
 ```
 
-## 4\. Use these useful Utility types
+## 4\. Use these useful Utility Types
 
 TypeScript provides several built-in utility types that simplify everyday tasks. Here are a few essential ones that every developer should know:
 
@@ -141,3 +141,56 @@ TypeScript provides several built-in utility types that simplify everyday tasks.
 
   // myCar.brand = "BMW"; // Error: Cannot assign to 'brand' because it is a read-only property.
   ```
+
+## 5\. Template Literal Types
+
+Introduced in TypeScript 4.1 allowing you to create types by combining strings, making it a powerful tool when you need to construct specific string patterns.
+
+For example, if you're building a system that involves dynamically creating string types based on variables, you can use template literal types:
+
+```ts
+type EventName<T extends string> = `on${Capitalize<T>}Event`;
+
+type ClickEvent = EventName<'click'>; // 'onClickEvent'
+```
+
+These are particularly useful when creating dynamic string-based APIs, such as generating event handler names or key types. You can also combine these with conditional types for even more advanced behavior:
+
+```ts
+type Props<T extends string> = T extends `${infer Prefix}-suffix`
+  ? `${Prefix}-prop`
+  : T;
+
+type Example1 = Props<'test-suffix'>; // 'test-prop'
+type Example2 = Props<'prefix-test'>; // 'prefix-test'
+```
+
+### Intrinsic String Manipulation Types
+
+In addition to Template Literal Types, TypeScript provides **Intrinsic String Manipulation Types**, which allow you to transform string types directly:
+
+- `Uppercase<StringType>`: Converts a string type to uppercase.
+
+  ```ts
+  type Shout = Uppercase<'hello'>; // 'HELLO'
+  ```
+
+- `Lowercase<StringType>`: Converts a string type to lowercase.
+
+  ```ts
+  type Whisper = Lowercase<'HELLO'>; // 'hello'
+  ```
+
+- `Capitalize<StringType>`: Capitalizes the first letter of a string.
+
+  ```ts
+  type Greet = Capitalize<'hello'>; // 'Hello'
+  ```
+
+- `Uncapitalize<StringType>`: Uncapitalizes the first letter of a string.
+
+  ```ts
+  type QuietGreet = Uncapitalize<'Hello'>; // 'hello'
+  ```
+
+These are particularly useful when you need to transform strings dynamically within types, offering greater flexibility and precision in type definitions.
