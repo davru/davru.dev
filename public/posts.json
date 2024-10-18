@@ -1,27 +1,10 @@
 [
   {
-    "slug": "exploring-the-power-of-bun",
+    "slug": "maximizing-typescript-with-5-tips",
     "date": "2024-10-19T10:34:00.000Z",
     "tags": ["TypeScript"],
     "summary": "Discover 5 powerful TypeScript tips to improve your code. Learn how to use key utility types like Partial and Omit, optimize type inference, enforce immutability with as const, implement type guards, and leverage conditional types with extend.",
     "title": "🚀 Maximizing TypeScript: 5 tips to unlock its full potential",
-    "meta": [
-      {
-        "property": "og:url",
-        "content": "https://davru.dev/blog/first-blog-post"
-      },
-      {
-        "property": "og:image",
-        "content": "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post.jpeg"
-      },
-      {
-        "property": "twitter:url",
-        "content": "https://davru.dev/blog/first-blog-post"
-      },
-      {
-        "name": "twitter:image",
-        "content": "https://contenthub-static.grammarly.com/blog/wp-content/uploads/2017/11/how-to-write-a-blog-post.jpeg"
-      }
-    ]
+    "published": false
   }
 ]

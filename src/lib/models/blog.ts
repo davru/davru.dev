@@ -5,5 +5,5 @@ export interface BlogPost {
   summary: string;
   tags: string[];
   date: string;
-  // meta: MetaDefinition[]; TODO meta tags
+  published: boolean;
 }
