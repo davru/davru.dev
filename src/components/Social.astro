@@ -89,15 +89,12 @@
     bottom: 0;
     left: 0em;
     width: 30px;
-    margin: 0 1.6em;
+    margin: 0 1.75rem;
     color: var(--text-color);
+    margin-top: auto;
   }
 
-  svg {
-  	pointer-events: none;
-  }
-
-  .social-links .social-icons-list {
+  .social-icons-list {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,7 +103,7 @@
     list-style: none;
   }
 
-  .social-links .social-icons-list::after {
+  .social-icons-list::after {
     content: "";
     display: block;
     width: 1px;
@@ -115,16 +112,16 @@
     background-color: var(--text-color);
   }
 
-  .social-links .social-icons-list .social-icon:last-child {
+  .social-icon:last-child {
     margin-bottom: 1em;
   }
 
-  .social-links .social-icons-list .social-icon__link {
+  .social-icon__link {
     display: inline-block;
     padding: 0.6em 0;
   }
 
-  .social-links .social-icons-list .social-icon__link__text {
+  .social-icon__link__text {
     clip-path: inset(100%);
     clip: rect(1px, 1px, 1px, 1px);
     height: 1px;
@@ -134,27 +131,28 @@
     width: 1px;
   }
 
-  .social-links .social-icons-list .icon {
+  .icon {
     max-width: 1.4em;
     transition: all 0.2s ease;
     stroke: var(--text-color);
+    pointer-events: none;
   }
 
-  .social-links .social-icons-list .icon[name="linkedin"] {
+  .icon[name="linkedin"] {
     stroke: transparent;
     fill: var(--text-color);
   }
 
   @media (min-width: 600px) {
-    .social-links .social-icons-list .social-icon__link:hover .icon {
+  	.social-icon__link:hover .icon {
       color: var(--color-text-main);
     }
 
-    .social-links .social-icons-list .social-icon__link:hover .icon:not([name="linkedin"]) {
+    .social-icon__link:hover .icon:not([name="linkedin"]) {
       stroke: var(--color-text-main);
     }
 
-    .social-links .social-icon__link:hover .icon[name="linkedin"] {
+    .social-icon__link:hover .icon[name="linkedin"] {
       fill: var(--color-text-main);
     }
   }
@@ -162,7 +160,7 @@
   @media (max-width: 1000px) {
     .social-links {
       position: relative;
-      margin: 0;
+      margin: auto 0 0 0;
       padding-bottom: 1em;
       width: 100%;
     }

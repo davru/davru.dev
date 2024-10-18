@@ -6,7 +6,7 @@ const path = new URL(url).pathname
 
 <nav class="nav">
   <div class="nav-logo">
-    <h1>davru</h1>
+    <h1><a href="/">davru</a></h1>
   </div>
   <div class="nav-links">
     <a href="/" class:list={["nav-link", { active: path == '/' }]}>
@@ -33,7 +33,7 @@ const path = new URL(url).pathname
   .nav-logo h1 {
     color: var(--color-text-main);
     display: inline-block;
-    font-size: 1.05em;
+    font-size: 1.2rem;
     font-weight: bold;
   }
 
@@ -41,7 +41,7 @@ const path = new URL(url).pathname
     display: flex;
     align-items: center;
     font-weight: 500;
-    font-size: .85em;
+    font-size: 1rem;
     gap: 1.5em;
   }
 
@@ -71,7 +71,6 @@ const path = new URL(url).pathname
 
   	.nav-links {
 	    gap: 2.5em;
-	    font-size: .95em;
     }
 
     .nav-link:hover > .nav-link-text, .nav-link.active > .nav-link-text {
