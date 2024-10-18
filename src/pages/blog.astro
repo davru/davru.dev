@@ -3,7 +3,7 @@ import TagList from "@components/TagList.astro";
 import Layout from "@layouts/Layout.astro";
 import { getPosts, relativeTime } from "@lib/utils";
 
-const posts = getPosts()
+const posts = getPosts().filter(p => p.published)
 ---
 
 <Layout title="Blog - David (davru) Sanchez" description="Blog page for davru.dev where I will be publishing updates for my projects, tips and tricks and other code related articles... or that's what I expect at least :^D">
@@ -29,7 +29,7 @@ const posts = getPosts()
 
 <style>
 	.blog-list__wrapper {
-	  padding: 8rem 1.75rem 5rem 1.75rem;
+	  padding: 6rem 1.75rem 5rem 1.75rem;
 	  max-width: 100%;
 	  color: var(--text-color);
 	}
@@ -51,11 +51,6 @@ const posts = getPosts()
 
 	.blog-list__post header h3 {
 	  font-size: 1.25rem;
-		text-align: justify;
-	}
-
-	.blog-list__post header time {
-	  display: none;
 	}
 
 	.blog-list__post main {
@@ -92,10 +87,6 @@ const posts = getPosts()
 
 	  .blog-list__post header .blog-list__post_title:hover {
 	    text-decoration: line-through;
-	  }
-
-	  .blog-list__post header time {
-	    display: block;
 	  }
 
 	  .blog-list__post_footer__more {

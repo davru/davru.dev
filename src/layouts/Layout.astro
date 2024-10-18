@@ -5,13 +5,15 @@ import Analytics from '@components/Analytics.astro';
 import Cursor from '@components/Cursor.astro';
 import Navbar from '@components/Navbar.astro';
 import Social from '@components/Social.astro';
+import { type MetaTag } from '@lib/models';
 
 interface Props {
 	title: string;
 	description: string;
+	meta?: MetaTag[];
 }
 
-const { title, description } = Astro.props;
+const { title, description, meta } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,6 +25,11 @@ const { title, description } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		{meta?.map(tag =>
+			'property' in tag
+				? <meta property={tag.property} content={tag.content} />
+				: <meta name={tag.name} content={tag.content} />
+		)}
 	</head>
 	<body>
 		<Navbar/>
@@ -56,6 +63,8 @@ const { title, description } = Astro.props;
 	}
 
 	body {
+		display: flex;
+		flex-direction: column;
     background: var(--bg-color);
     height: 100vh;
     height: 100dvh;
