@@ -44,7 +44,7 @@
     const target = e.target;
 
     if (target) {
-      const link = target.nodeName === 'A' && !!target.getAttribute('href');
+      const link = (target.nodeName === 'A' && !!target.getAttribute('href')) || !!target.hasAttribute('cursor-pulse');
 
       if (link) {
         cursor.children[0].classList.add('pulse');
