@@ -5,6 +5,6 @@
     "tags": ["TypeScript"],
     "summary": "Discover 5 powerful TypeScript tips to improve your code. Learn how to use key utility types like Partial and Omit, optimize type inference, enforce immutability with as const, implement type guards, and leverage conditional types with extend.",
     "title": "🚀 Maximizing TypeScript: 5 tips to unlock its full potential",
-    "published": false
+    "published": true
   }
 ]

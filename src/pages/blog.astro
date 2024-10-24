@@ -1,9 +1,11 @@
 ---
 import TagList from "@components/TagList.astro";
 import Layout from "@layouts/Layout.astro";
-import { getPosts, relativeTime } from "@lib/utils";
+import { relativeTime } from "@lib/utils";
+import data from '../../public/data/posts.json';
+import type { BlogPost } from "@lib/models";
 
-const posts = getPosts().filter(p => p.published)
+const posts = ((data as unknown as BlogPost[]) ?? []).filter(p => p.published)
 ---
 
 <Layout title="Blog - David (davru) Sanchez" description="Blog page for davru.dev where I will be publishing updates for my projects, tips and tricks and other code related articles... or that's what I expect at least :^D">
