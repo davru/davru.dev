@@ -11,7 +11,6 @@
     "deploy": "npx wrangler pages deploy dist --project-name davru"
   },
   "dependencies": {
-    "@aptabase/web": "^0.4.3",
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^3.1.8",
     "@fontsource-variable/jetbrains-mono": "^5.1.1",
