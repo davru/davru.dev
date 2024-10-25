@@ -4,7 +4,7 @@
     "name": "Shar3 (WIP)",
     "summary": "Desktop app for easily sharing your folders and files temporarily with a QR code or url. Works inside and outside of your local network!",
     "tags": ["React", "Electron", "Express"],
-    "image": "/images/shar3.webp",
+    "image": "/images/work/shar3.webp",
     "url": "https://github.com/DSGDSR/shar3-app"
   },
   {
@@ -20,7 +20,7 @@
     "name": "Spotifyrics",
     "summary": "It is a small desktop app developed with React and Electron, allowing you to control your Spotify client and display real-time lyrics depending on the song you are listening to without logging in.",
     "tags": ["React", "Electron", "TypeScript", "Webpack", "Genius API"],
-    "image": "/images/spotifyrics.png",
+    "image": "/images/work/spotifyrics.webp",
     "url": "https://spotifyrics.davru.dev/"
   }
 ]
