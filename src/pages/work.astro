@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import data from '../../public/data/work.json';
+import TagList from '@components/TagList.astro';
 
 // TODO interface
 const work = ((data as unknown as any[]) ?? [])
@@ -11,8 +12,9 @@ const work = ((data as unknown as any[]) ?? [])
 	  <div class="work__slider" id="slider" data-slide="1">
    		<figure class="work__slider__image">
    			<a target="_blank" id="slider-url" href={work[0].url}>
-    		<img id="slider-image" src={work[0].image} alt={`${work[0].name} - ${work[0].summary}`}>
+    			{ work.map(project => <img src={project.image} alt={`${project.name} - ${project.summary}`}> )}
 				</a>
+				<div id="work__slider__image__wip"><TagList tags={['WIP']} /></div>
      	</figure>
 
       <hgroup class="work__slider__title">
@@ -35,13 +37,16 @@ const work = ((data as unknown as any[]) ?? [])
   </main>
 
   <main class="work--mobile">
-	 	{ work.map(project => <article class="work--mobile__project">
+	 	{ work.map(project => <article class="work__project">
 		  <figure>
 				<a target="_blank" href={project.url}>
 					<img src={project.image} alt={`${project.name} - ${project.summary}`}>
 				</a>
 			</figure>
-			<h2><a target="_blank" href={project.url}>{project.name}</a></h2>
+			<div class="work__project__title">
+				<h2><a target="_blank" href={project.url}>{project.name}</a></h2>
+				<span>{ project.wip && <TagList tags={['WIP']} /> }</span>
+			</div>
    	</article>)}
   </main>
 
@@ -52,7 +57,6 @@ const work = ((data as unknown as any[]) ?? [])
 	const slider = document.getElementById('slider');
 	const slideCount = document.getElementById('slide-count');
 	const sliderUrl = document.getElementById('slider-url');
-	const sliderImage = document.getElementById('slider-image');
 	const sliderTitle = document.getElementById('slider-title');
 	const sliderSummary = document.getElementById('slider-summary');
 
@@ -69,10 +73,25 @@ const work = ((data as unknown as any[]) ?? [])
 		slideCount.innerText = slide;
 		const project = work[slide - 1];
 		sliderUrl.setAttribute('href', project.url);
-		sliderImage.setAttribute('src', project.image);
 		sliderTitle.setAttribute('href', project.url);
+		scrollImages(slide);
 		typeEffect(sliderTitle, project.name);
 		typeEffect(sliderSummary, project.summary, 15, 5);
+
+		if (project.wip) {
+			document.getElementById('work__slider__image__wip').style.opacity = 100;
+		} else {
+			document.getElementById('work__slider__image__wip').style.opacity = 0;
+		}
+	}
+
+	const scrollImages = (slide) => {
+		const scrollTo = 600 * (slide - 1);
+		sliderUrl.scroll({
+		  top: scrollTo,
+		  left: 0,
+		  behavior: "smooth",
+		});
 	}
 
 	const previous = () => {
@@ -212,6 +231,13 @@ const work = ((data as unknown as any[]) ?? [])
 		color: var(--color-text-main);
 	}
 
+	#work__slider__image__wip {
+		position: absolute;
+		top: 1rem; left: 0;
+		transform: scale(1.5);
+		transition: opacity .3s;
+	}
+
 	.work__slider__image {
 		width: var(--width);
 		height: var(--image-height);
@@ -219,9 +245,11 @@ const work = ((data as unknown as any[]) ?? [])
 	}
 
 	.work__slider__image a {
-		display: block;
+		display: flex;
+		flex-direction: column;
 		width: 100%;
 		height: 100%;
+		overflow: hidden;
 	}
 
 	.work__slider__image img {
@@ -243,27 +271,34 @@ const work = ((data as unknown as any[]) ?? [])
   	max-width: 100%;
 	}
 
-	.work--mobile__project h2 {
+	.work__project__title {
+		display: flex;
+		align-items: center;
+		gap: .5rem;
+	}
+
+	.work__project h2 {
 		color: white;
 		font-size: 1rem;
 	}
 
-	.work--mobile__project {
+	.work__project {
 		display: flex;
 		flex-direction: column;
+		position: relative;
 	}
 
-	.work--mobile__project figure {
+	.work__project figure {
 		max-width: 600px;
 	}
 
-	.work--mobile__project figure a {
+	.work__project figure a {
 		display: block;
 		width: 100%;
 		height: 100%;
 	}
 
-	.work--mobile__project figure img {
+	.work__project figure img {
 		pointer-events: none;
     width: 100%;
     height: 100%;
