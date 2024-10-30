@@ -1,0 +1,161 @@
+---
+const { url } = Astro.request
+
+const path = new URL(url).pathname
+---
+
+<nav id="mobile-nav" class="mobile-nav__container">
+	<div class="mobile-nav__ham">
+		<div class="mobile-nav__menu">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+	<ol class="mobile-nav__links">
+		<li><span>1.</span><a class:list={[{ active: path == '/' }]} href="/">home</a></li>
+		<li><span>2.</span><a class:list={[{ active: path == '/work' }]} href="/work">work</a></li>
+		<li><span>3.</span><a class:list={[{ active: path == '/blog' }]} href="/blog">blog</a></li>
+	</ol>
+
+	<div id="mobile-nav__close">
+		<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+			<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+			<path d="M18 6l-12 12" /><path d="M6 6l12 12" />
+		</svg>
+	</div>
+</nav>
+
+<script is:inline defer>
+	const nav = document.getElementById('nav');
+	const mobileNav = document.getElementById('mobile-nav');
+	const mobileNavClose = document.getElementById('mobile-nav__close');
+
+	mobileNav.addEventListener('click', (event) => {
+		console.log('open')
+		document.documentElement.style.overflowY = 'hidden';
+		mobileNav.classList.add('active');
+		nav.classList.add('mobile');
+		event.stopPropagation();
+	});
+
+	mobileNavClose.addEventListener('click', (event) => {
+		document.documentElement.style.overflowY = 'auto';
+		mobileNav.classList.remove('active');
+	  nav.classList.add('transitioning');
+	  setTimeout(() => {
+	    nav.classList.remove('transitioning');
+			nav.classList.remove('mobile');
+	  }, 700);
+		event.stopPropagation();
+	});
+</script>
+
+<style>
+	.mobile-nav__ham {
+		position: absolute;
+		top: 2.1rem; right: 1.75rem;
+		width: 1.25rem;
+		height: 0.8rem;
+		z-index: 100;
+		transition: all .2s ease .6s;
+	}
+
+	#mobile-nav.active .mobile-nav__ham {
+		position: fixed;
+		top: 0;
+		right: 0;
+		height: 0;
+		background: var(--color-text-main);
+		width: 100vw;
+		height: 100vh;
+	}
+
+	#mobile-nav__close {
+		position: absolute;
+		top: 1.75rem; right: 1.75rem;
+		color: white;
+		z-index: 150;
+		pointer-events: none;
+		transform: rotate(720deg);
+		opacity: 0;
+		transition: opacity .2s ease .4s, transform .2s ease .4s;
+	}
+
+	#mobile-nav.active #mobile-nav__close {
+		pointer-events: all;
+		transform: rotate(0deg);
+		opacity: 100;
+	}
+
+	.mobile-nav__menu {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		width: 100%;
+	}
+
+	.mobile-nav__menu span {
+		position: absolute;
+		top: 0;
+		height: 1.5px;
+		width: 100%;
+		background: white;
+		transition: top .2s ease, background .2s ease .7s, transform .2s ease .45s;
+	}
+
+	.mobile-nav__menu span:nth-child(2) {
+		top: 50%;
+	}
+
+	.mobile-nav__menu span:nth-child(3) {
+		top: 100%;
+	}
+
+	#mobile-nav.active .mobile-nav__ham span {
+		top: 50% !important;
+		background: transparent;
+		transform: rotate(180deg);
+		transition: top .2s ease, background .2s ease .4s, transform .2s ease .45s;
+	}
+
+	.mobile-nav__links {
+		pointer-events: none;
+		position: absolute;
+		display: flex;
+		flex-direction: column;
+		opacity: 0;
+		top: 50%; left: 2rem;
+		transform: translateY(-50%);
+		transition: opacity .3s ease .4s;
+		color: white;
+		font-size: 3.5rem;
+		font-weight: bold;
+		z-index: 115;
+		gap: 7.5vh;
+		list-style: none;
+		padding: 0;
+	}
+
+	.mobile-nav__links li {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.mobile-nav__links li a.active {
+		text-decoration: line-through;
+	}
+
+	#mobile-nav.active .mobile-nav__links {
+		pointer-events: all;
+		opacity: 100;
+		transition: opacity .3s ease .7s;
+	}
+
+	@media (min-width: 600px) {
+		#mobile-nav {
+			display: none;
+		}
+	}
+</style>

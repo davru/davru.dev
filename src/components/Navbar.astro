@@ -4,7 +4,7 @@ const { url } = Astro.request
 const path = new URL(url).pathname
 ---
 
-<nav class="nav">
+<nav class="nav" id="nav">
   <div class="nav-logo">
     <h1><a href="/">davru</a></h1>
   </div>
@@ -33,15 +33,26 @@ const path = new URL(url).pathname
     justify-content: space-between;
   }
 
+  .nav.mobile {
+    z-index: 125;
+  }
+
   .nav-logo h1 {
     color: var(--color-text-main);
     display: inline-block;
     font-size: 1.2rem;
     font-weight: bold;
+    transition: color 0.2s ease 0.5s;
+  }
+  .nav.mobile .nav-logo h1 {
+    color: #ffffff;
+  }
+  .nav.transitioning .nav-logo h1 {
+    color: var(--color-text-main);
   }
 
   .nav-links {
-    display: flex;
+    display: none;
     align-items: center;
     font-weight: 500;
     font-size: 1rem;
@@ -77,6 +88,7 @@ const path = new URL(url).pathname
 		}
 
   	.nav-links {
+   		display: flex;
 	    gap: 2.5em;
     }
 
