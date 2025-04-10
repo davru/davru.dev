@@ -1,7 +1,6 @@
 ---
 import TagList from "@components/TagList.astro";
 import Layout from "@layouts/Layout.astro";
-import { relativeTime } from "@lib/utils";
 import data from '../../public/data/posts.json';
 import type { BlogPost } from "@lib/models";
 
@@ -20,14 +19,21 @@ const posts = ((data as unknown as BlogPost[]) ?? []).filter(p => p.published)
 
 	      <main>{post.summary} <a href={`/blog/${post.slug}`} class="blog-list__post_footer__read-more">read more...</a></main>
 
-	      <footer>
-          <time>{ relativeTime(post.date) }</time>
+	      <footer class="blog-list__post__footer">
+          <time class="blog-list__post__footer__date" data-date={post.date}></time>
 	        <TagList tags={post.tags}></TagList>
 	      </footer>
 	    </div>
 	  ))}
 	</div>
 </Layout>
+
+<script is:inline>
+	const dates = document.querySelectorAll('.blog-list__post__footer__date');
+	dates.forEach(date => {
+		date.innerHTML = window.relativeTime(date.getAttribute('data-date'));
+	});
+</script>
 
 <style>
 	.blog-list__wrapper {
@@ -44,7 +50,7 @@ const posts = ((data as unknown as BlogPost[]) ?? []).filter(p => p.published)
 	.blog-list__post {
   	width: 700px;
    	max-width: 100%;
-	  margin: 0 auto;
+	  margin: 0 auto 5rem auto;
 	}
 
 	.blog-list__post header {
