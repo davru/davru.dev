@@ -1,7 +1,7 @@
 ---
 import ProgressBar from '@components/ProgressBar.astro';
 import TagList from '@components/TagList.astro';
-import { buildPostMeta, relativeTime } from '@lib/utils';
+import { buildPostMeta } from '@lib/utils';
 import Layout from './Layout.astro';
 import data from '../../public/data/posts.json';
 import type { BlogPost } from "@lib/models";
@@ -21,7 +21,7 @@ const meta = buildPostMeta(post);
         <h1 class="blog-post__title">{ post?.title }</h1>
 
         <div class="blog-post__details">
-          <time>{ relativeTime(post?.date) }</time>
+          <time class="blog-post__details__date" data-date={post.date}></time>
         	<TagList tags={post?.tags ?? []}></TagList>
         </div>
       </header>
@@ -34,6 +34,11 @@ const meta = buildPostMeta(post);
 
   <ProgressBar></ProgressBar>
 </Layout>
+
+<script is:inline>
+	const date = document.querySelector('.blog-post__details__date');
+	date.innerHTML = window.relativeTime(date.getAttribute('data-date'));
+</script>
 
 <style>
 	.blog-post__wrapper > article {
@@ -258,7 +263,7 @@ const meta = buildPostMeta(post);
 	#mdx h6 {
 		font-family: var(--default-fonts);
 		margin-bottom: .6rem;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
 	}
 
 	#mdx h1 + p,
