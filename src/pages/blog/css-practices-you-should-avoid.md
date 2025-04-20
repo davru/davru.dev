@@ -1,4 +1,6 @@
-# 10 CSS Practices You Should Never Follow: Common Mistakes to Avoid
+---
+layout: ../../layouts/BlogPost.astro
+---
 
 **Steer clear of these CSS pitfalls that cause maintainability nightmares and performance issues.**
 
@@ -24,7 +26,7 @@ The `!important` declaration overrides all other styles, breaking the natural ca
 
 Using `!important` reactively as a way to fix specificity problems only masks underlying issues in your CSS architecture. It should be used sparingly and only when absolutely necessary, such as for utility classes that should always take precedence.
 
-## 2. Using IDs for Styling
+## 2. Using IDs for styling
 
 While some sources suggest using IDs for faster DOM access, most modern best practices recommend avoiding IDs for styling purposes.
 
@@ -42,7 +44,7 @@ While some sources suggest using IDs for faster DOM access, most modern best pra
 
 IDs have extremely high specificity (255 times more specific than a class), making them difficult to override when needed. Classes provide better reusability and flexibility in your styling architecture.
 
-## 3. Throwing Everything Into One CSS File
+## 3. Throwing everything into a single CSS file
 
 Keeping all your CSS in a single massive file makes maintenance incredibly difficult, especially on larger projects.
 
@@ -52,15 +54,15 @@ Keeping all your CSS in a single massive file makes maintenance incredibly diffi
 
 /* ✅ BETTER PRACTICE */
 /* Split into logical components */
-@import url("reset.css");
-@import url("typography.css");
-@import url("layout.css");
-@import url("components.css");
+@import url('reset.css');
+@import url('typography.css');
+@import url('layout.css');
+@import url('components.css');
 ```
 
 For production, consider using a build tool to combine these files to reduce HTTP requests while maintaining organization during development.
 
-## 4. Using Overly Descriptive Selectors Based on Appearance
+## 4. Using overly descriptive selectors based on appearance
 
 Naming your selectors based on how they look rather than what they represent is a recipe for future problems.
 
@@ -80,7 +82,7 @@ Naming your selectors based on how they look rather than what they represent is 
 
 When the design changes (and it will), class names based on appearance become misleading and require additional changes.
 
-## 5. Using Unnecessarily Long Selector Chains
+## 5. Using unnecessarily long selector chains
 
 Long selector chains are inefficient and make your CSS more brittle.
 
@@ -98,7 +100,7 @@ body #container .main-content .blog-row .blog-col section article p a {
 
 These overly specific selectors increase file size, reduce performance, and make your CSS harder to maintain. They also make it difficult to reuse styles elsewhere.
 
-## 6. Neglecting to Organize CSS in a Logical Way
+## 6. Neglecting to organize CSS in a logical way
 
 Disorganized CSS without comments or structure makes future maintenance a nightmare.
 
@@ -108,16 +110,22 @@ Disorganized CSS without comments or structure makes future maintenance a nightm
 
 /* ✅ BETTER PRACTICE */
 /* ====== HEADER ====== */
-.header { ... }
-.navigation { ... }
+.header {
+  ...;
+}
+.navigation {
+  ...;
+}
 
 /* ====== MAIN CONTENT ====== */
-.main-content { ... }
+.main-content {
+  ...;
+}
 ```
 
 Take time to organize your styles logically and add comments to make your CSS more navigable for yourself and other developers.
 
-## 7. Using Color Names Instead of Hex or RGB Values
+## 7. Using color names instead of hex or RGB values
 
 Using named colors like "red" or "blue" can lead to inconsistent rendering across browsers.
 
@@ -129,13 +137,13 @@ Using named colors like "red" or "blue" can lead to inconsistent rendering acros
 
 /* ✅ BETTER PRACTICE */
 .alert {
-  color: #FF0000; /* or rgba(255, 0, 0, 1) */
+  color: #ff0000; /* or rgba(255, 0, 0, 1) */
 }
 ```
 
 Always use specific hex codes, RGB, or HSL values to ensure consistent colors across all browsers and maintain better control over your design.
 
-## 8. Forgetting to Use a CSS Reset or Normalize
+## 8. Forgetting to use a CSS reset or normalize
 
 Different browsers apply their own default styles to HTML elements, which can create inconsistencies in your design.
 
@@ -153,7 +161,7 @@ body {
 
 Using a CSS reset or normalize.css helps create a consistent baseline across all browsers, making your designs more predictable.
 
-## 9. Using Inline Styles
+## 9. Using inline styles
 
 Inline styles mix content with presentation, making your code harder to maintain and defeating the purpose of CSS.
 
@@ -164,14 +172,12 @@ Inline styles mix content with presentation, making your code harder to maintain
 </div>
 
 <!-- ✅ BETTER PRACTICE -->
-<div class="info-box">
-  This uses an external class
-</div>
+<div class="info-box">This uses an external class</div>
 ```
 
 Keep your styles in external stylesheets to maintain separation of concerns and allow for better caching and maintenance.
 
-## 10. Not Minifying CSS for Production
+## 10. Not minifying CSS for production
 
 Leaving unnecessary whitespace and comments in production CSS files increases file size and slows down your website.
 
@@ -184,12 +190,15 @@ Leaving unnecessary whitespace and comments in production CSS files increases fi
 }
 
 /* PRODUCTION CSS (MINIFIED) */
-.header{margin-bottom:20px;background-color:#f5f5f5}
+.header {
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+}
 ```
 
 Always use a minification tool to optimize your CSS for production environments. This reduces file size and improves load times.
 
-## Bonus Mistake: Redundant CSS
+## Bonus mistake: Redundant CSS
 
 Repeating the same properties across multiple selectors creates bloat in your stylesheets.
 
@@ -206,7 +215,8 @@ span {
 }
 
 /* ✅ BETTER PRACTICE */
-p, span {
+p,
+span {
   font-size: 16px;
   color: #333;
 }
