@@ -6,5 +6,13 @@
     "summary": "Discover 5 powerful TypeScript tips to improve your code. Learn how to use key utility types like Partial and Omit, optimize type inference, enforce immutability with as const, implement type guards, and leverage conditional types with extend.",
     "title": "🚀 Maximizing TypeScript: 5 tips to unlock its full potential",
     "published": true
+  },
+  {
+    "slug": "css-practices-you-should-avoid",
+    "date": "2025-02-25T18:00:00.140Z",
+    "tags": ["CSS"],
+    "summary": "Steer clear of these CSS pitfalls that cause maintainability nightmares and performance issues.",
+    "title": "10 CSS practices you should never follow",
+    "published": false
   }
 ]
