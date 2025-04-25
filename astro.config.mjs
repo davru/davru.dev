@@ -5,14 +5,12 @@ import { copyButtonTransformer, removeItalic } from './shiki';
 
 // https://astro.build/config
 export default defineConfig({
-  experimental: {
-    env: {
-      schema: {
-        PUBLIC_APTABASE_KEY: envField.string({
-          context: 'client',
-          access: 'public'
-        })
-      }
+  env: {
+    schema: {
+      PUBLIC_APTABASE_KEY: envField.string({
+        context: 'client',
+        access: 'public'
+      })
     }
   },
   integrations: [mdx()],
