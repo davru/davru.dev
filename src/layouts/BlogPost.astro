@@ -5,6 +5,7 @@ import { buildPostMeta } from '@lib/utils';
 import Layout from './Layout.astro';
 import data from '../../public/data/posts.json';
 import type { BlogPost } from "@lib/models";
+import BackToTop from '@components/BackToTop.astro';
 
 const { url } = Astro.request;
 
@@ -33,6 +34,8 @@ const meta = buildPostMeta(post);
   </div>
 
   <ProgressBar></ProgressBar>
+
+  <BackToTop></BackToTop>
 </Layout>
 
 <script is:inline>
