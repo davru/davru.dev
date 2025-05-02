@@ -1,0 +1,90 @@
+<div id="back-to-top" class="hidden" cursor-pulse>
+	<span class="text">back to top</span>
+	<span class="body"></span>
+	<span class="arrow-left"></span>
+	<span class="arrow-right"></span>
+</div>
+
+<style>
+	#back-to-top {
+  	position: fixed;
+   	bottom: -85px;
+    right: 0;
+    width: 30px;
+    margin: 0 1.75rem;
+    margin-top: auto;
+    transition: bottom .5s;
+  }
+
+  #back-to-top.hidden {
+   	bottom: -150px;
+  }
+
+  #back-to-top .body {
+    display: block;
+    width: 1px;
+    height: 120px;
+    margin: 0 auto;
+    background-color: var(--text-color);
+  }
+
+  #back-to-top .text {
+  	position: absolute;
+  	transform: rotate(-90deg);
+   	width: 100px;
+    font-size: .8rem;
+    right: -1.5rem;
+    bottom: 3rem;
+    opacity: 0;
+    color: var(--text-color);
+    transition: opacity .5s;
+  }
+
+  #back-to-top .arrow-right, #back-to-top .arrow-left {
+  	position: absolute;
+	  width: 1px;
+	  height: 15px;
+		background-color: var(--text-color);
+		top: -.15rem;
+    left: 0.59rem;
+		transform: rotate(45deg);
+  }
+
+  #back-to-top .arrow-right {
+    left: 1.21rem;
+		transform: rotate(-45deg);
+  }
+
+  #back-to-top:not(.hidden):hover {
+   	bottom: 0px;
+  }
+  #back-to-top:not(.hidden):hover .text {
+ 		opacity: 100;
+  }
+</style>
+
+<script is:inline type="module">
+	const backToTop = document.querySelector('#back-to-top')
+
+	const checkScroll = () => {
+		const docElem = document.documentElement
+    const docBody = document.body
+    const scrollTop = docElem['scrollTop'] || docBody['scrollTop']
+    const isHidden = backToTop.classList.contains('hidden')
+    console.log(scrollTop)
+    if (scrollTop > 500 && isHidden) {
+    	backToTop.classList.remove('hidden')
+    } else if (scrollTop < 500 && !isHidden) {
+   		backToTop.classList.add('hidden')
+    }
+	}
+
+	backToTop.addEventListener('click', () => {
+		document.removeEventListener('scroll', checkScroll)
+		backToTop.classList.add('hidden')
+		window.scrollTo({top: 0})
+		setTimeout(() => document.addEventListener('scroll', checkScroll), 2000)
+	})
+
+	document.addEventListener('scroll', checkScroll)
+</script>
