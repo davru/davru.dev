@@ -2,7 +2,7 @@
   <div class="bubble"></div>
 </div>
 
-<script is:inline type="module">
+<script is:inline type="module" data-astro-rerun>
   const cursor = document.querySelector("#cursor");
   const cursorSize = { height: 75, width: 75 };
   let cursorPosition = { x: -100, y: -100 };
@@ -26,7 +26,7 @@
     localStorage.setItem('cursorPosition', JSON.stringify(cursorPosition));
   });
 
-  document.addEventListener('scroll', () => updateCursor());
+  document.addEventListener('scroll', updateCursor);
 
   document.addEventListener('mousedown', () => {
     cursor.classList.add('expand');

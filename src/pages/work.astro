@@ -53,7 +53,7 @@ const work = ((data as unknown as any[]) ?? [])
   <div></div>
 </Layout>
 
-<script is:inline type="module" define:vars={{work}}>
+<script is:inline type="module" define:vars={{work}} data-astro-rerun>
 	const slider = document.getElementById('slider');
 	const slideCount = document.getElementById('slide-count');
 	const sliderUrl = document.getElementById('slider-url');

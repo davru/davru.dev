@@ -13,7 +13,7 @@ const posts = ((data as unknown as BlogPost[]) ?? []).filter(p => p.published)
 	    <div class="blog-list__post">
 	      <header>
 					<h3>
-	        	<a href={`/blog/${post.slug}`} class="blog-list__post_title">{ post.title }</a>
+	        	<a href={`/blog/${post.slug}`} class="blog-list__post_title" transition:name={post.slug}>{ post.title }</a>
 	        </h3>
 	      </header>
 
@@ -28,10 +28,16 @@ const posts = ((data as unknown as BlogPost[]) ?? []).filter(p => p.published)
 	</div>
 </Layout>
 
-<script is:inline>
+<script is:inline data-astro-rerun define:vars={{ posts }}>
 	const dates = document.querySelectorAll('.blog-list__post__footer__date');
 	dates.forEach(date => {
 		date.innerHTML = window.relativeTime(date.getAttribute('data-date'));
+	});
+
+	document.addEventListener('astro:before-swap', ({to, viewTransition, sourceElement}) => {
+	  if (to.pathname.includes('blog/') && window.scrollY === 0 && sourceElement.getAttribute('href').includes(posts[0].slug)) {
+    	viewTransition.skipTransition()
+	  }
 	});
 </script>
 

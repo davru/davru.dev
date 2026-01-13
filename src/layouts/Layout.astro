@@ -27,6 +27,7 @@ const { title, description, meta } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<meta name="keywords" content="David Sanchez Rubio, dsgdsr, davru.dev, davru, Front end, Front developer, Fullstack web" />
 		{meta?.map(tag =>
 			'property' in tag
 				? <meta property={tag.property} content={tag.content} />
@@ -35,8 +36,8 @@ const { title, description, meta } = Astro.props;
 		<ClientRouter />
 	</head>
 	<body>
-		<Navbar/>
-		<MobileMenu/>
+		<Navbar />
+		<MobileMenu />
 
 		<slot />
 

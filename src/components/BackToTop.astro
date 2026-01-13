@@ -63,15 +63,17 @@
   }
 </style>
 
-<script is:inline type="module">
+<script is:inline type="module" data-astro-rerun>
 	const backToTop = document.querySelector('#back-to-top')
 
 	const checkScroll = () => {
+		if (!backToTop) return;
+
 		const docElem = document.documentElement
     const docBody = document.body
     const scrollTop = docElem['scrollTop'] || docBody['scrollTop']
     const isHidden = backToTop.classList.contains('hidden')
-    console.log(scrollTop)
+
     if (scrollTop > 500 && isHidden) {
     	backToTop.classList.remove('hidden')
     } else if (scrollTop < 500 && !isHidden) {
@@ -86,5 +88,6 @@
 		setTimeout(() => document.addEventListener('scroll', checkScroll), 2000)
 	})
 
+	document.removeEventListener('scroll', checkScroll)
 	document.addEventListener('scroll', checkScroll)
 </script>
