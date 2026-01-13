@@ -4,7 +4,9 @@ import Layout from "@layouts/Layout.astro";
 import data from '../../public/data/posts.json';
 import type { BlogPost } from "@lib/models";
 
-const posts = ((data as unknown as BlogPost[]) ?? []).filter(p => p.published)
+const posts = ((data as unknown as BlogPost[]) ?? [])
+	.filter(p => p.published).sort((a, b) => new Date(b.date)
+	.getTime() - new Date(a.date).getTime());
 ---
 
 <Layout title="Blog - David (davru) Sanchez" description="Blog page for davru.dev where I will be publishing updates for my projects, tips and tricks and other code related articles... or that's what I expect at least :^D">
