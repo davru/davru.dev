@@ -23,7 +23,7 @@ const work = ((data as unknown as any[]) ?? [])
       </hgroup>
 
 			<div class="work__slider__controls">
-				<span class="work__slider__controls__item" id="control-previous" cursor-pulse>
+				<span class="work__slider__controls__item work__slider__controls__item--disabled" id="control-previous" cursor-pulse>
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12h6m3 0h1.5m3 0h.5" /><path d="M5 12l6 6" /><path d="M5 12l6 -6" /></svg>
 					<span>previous</span>
 				</span>
@@ -82,6 +82,22 @@ const work = ((data as unknown as any[]) ?? [])
 			document.getElementById('work__slider__image__wip').style.opacity = 100;
 		} else {
 			document.getElementById('work__slider__image__wip').style.opacity = 0;
+		}
+
+		// Update controls disabled state
+		const prevControl = document.getElementById('control-previous');
+		const nextControl = document.getElementById('control-next');
+		
+		if (slide === 1) {
+			prevControl.classList.add('work__slider__controls__item--disabled');
+		} else {
+			prevControl.classList.remove('work__slider__controls__item--disabled');
+		}
+		
+		if (slide === work.length) {
+			nextControl.classList.add('work__slider__controls__item--disabled');
+		} else {
+			nextControl.classList.remove('work__slider__controls__item--disabled');
 		}
 	}
 
@@ -214,13 +230,25 @@ const work = ((data as unknown as any[]) ?? [])
 	}
 
 	.work__slider__controls__item {
+		cursor: pointer;
 		display: flex;
 		align-items: center;
 		gap: .5rem;
+		transition: opacity .3s;
 	}
 
 	.work__slider__controls__item:hover span {
 		text-decoration: line-through;
+	}
+
+	.work__slider__controls__item--disabled {
+		opacity: 0.3;
+		cursor: not-allowed;
+		pointer-events: none;
+	}
+
+	.work__slider__controls__item--disabled:hover span {
+		text-decoration: none;
 	}
 
 	.work__slider__controls__item * {

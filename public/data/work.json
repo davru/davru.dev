@@ -1,12 +1,12 @@
 [
   {
-    "slug": "shar3",
-    "name": "Shar3",
-    "summary": "Desktop app for easily sharing your folders and files temporarily with a QR code or url. Works inside and outside of your local network!",
-    "tags": ["React", "Electron", "Express"],
-    "image": "/images/work/shar3.webp",
-    "url": "https://github.com/DSGDSR/shar3-app",
-    "wip": true
+    "slug": "is-vibe-coded",
+    "name": "Is this repo vibe coded?",
+    "summary": "A web application that uses heuristic patterns to analyze GitHub repositories and determine if they are 'vibe coded' based on their code quality, structure, and documentation.",
+    "tags": ["React", "Python", "AI"],
+    "image": "/images/work/is-vibe-coded.webp",
+    "url": "https://isvibecoded.com",
+    "wip": false
   },
   {
     "slug": "spotifyrics",
