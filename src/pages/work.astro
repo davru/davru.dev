@@ -12,9 +12,9 @@ const work = ((data as unknown as any[]) ?? [])
 	  <div class="work__slider" id="slider" data-slide="1">
    		<figure class="work__slider__image">
    			<a target="_blank" id="slider-url" href={work[0].url}>
-    			{ work.map(project => <img src={project.image} alt={`${project.name} - ${project.summary}`}> )}
+    			{ work.map(project => <img src={project.image} alt={`${project.name} - ${project.summary}`} onerror="this.onerror=null;this.src='/images/work/placeholder.webp'"> )}
 				</a>
-				<div id="work__slider__image__wip"><TagList tags={['WIP']} /></div>
+				<div id="work__slider__image__wip" style={`opacity: ${work[0].abandoned ? 1 : 0}`}><TagList tags={['Abandoned']} /></div>
      	</figure>
 
       <hgroup class="work__slider__title">
@@ -45,7 +45,11 @@ const work = ((data as unknown as any[]) ?? [])
 			</figure>
 			<div class="work__project__title">
 				<h2><a target="_blank" href={project.url}>{project.name}</a></h2>
-				<span>{ project.wip && <TagList tags={['WIP']} /> }</span>
+				<span>
+					{
+						project.abandoned === true && <TagList tags={['Abandoned']} />
+					}
+				</span>
 			</div>
    	</article>)}
   </main>
@@ -76,9 +80,9 @@ const work = ((data as unknown as any[]) ?? [])
 		sliderTitle.setAttribute('href', project.url);
 		scrollImages(slide);
 		typeEffect(sliderTitle, project.name);
-		typeEffect(sliderSummary, project.summary, 15, 5);
+		typeEffect(sliderSummary, project.summary, 5, 5);
 
-		if (project.wip) {
+		if (project.abandoned) {
 			document.getElementById('work__slider__image__wip').style.opacity = 100;
 		} else {
 			document.getElementById('work__slider__image__wip').style.opacity = 0;
