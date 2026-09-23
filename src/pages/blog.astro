@@ -4,9 +4,13 @@ import Layout from "@layouts/Layout.astro";
 import data from '../../public/data/posts.json';
 import type { BlogPost } from "@lib/models";
 
+// If date null show first as it will be published soon, otherwise sort by date
 const posts = ((data as unknown as BlogPost[]) ?? [])
-	.filter(p => p.published).sort((a, b) => new Date(b.date)
-	.getTime() - new Date(a.date).getTime());
+	.filter(p => p.published).sort((a, b) => {
+		if (!a.date) return -1;
+		if (!b.date) return 1;
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	});
 ---
 
 <Layout title="Blog - David (davru) Sanchez" description="Blog page for davru.dev where I will be publishing updates for my projects, tips and tricks and other code related articles... or that's what I expect at least :^D">
@@ -15,14 +19,14 @@ const posts = ((data as unknown as BlogPost[]) ?? [])
 	    <div class="blog-list__post">
 	      <header>
 					<h3>
-	        	<a href={`/blog/${post.slug}`} class="blog-list__post_title" transition:name={post.slug}>{ post.title }</a>
+	        	<a href={post.date ? `/blog/${post.slug}` : '/blog'} class="blog-list__post_title" transition:name={post.slug}>{ post.title }</a>
 	        </h3>
 	      </header>
 
-	      <main>{post.summary} <a href={`/blog/${post.slug}`} class="blog-list__post_footer__read-more">read more...</a></main>
+	      {!!post.summary && post.date && <main>{post.summary} <a href={`/blog/${post.slug}`} class="blog-list__post_footer__read-more">read more...</a></main>}
 
 	      <footer class="blog-list__post__footer">
-          <time class="blog-list__post__footer__date" data-date={post.date}></time>
+          {post.date ? <time class="blog-list__post__footer__date" data-date={post.date}></time> : <span class="blog-list__post__footer__date">Coming soon...</span>}
 	        <TagList tags={post.tags}></TagList>
 	      </footer>
 	    </div>
@@ -33,6 +37,7 @@ const posts = ((data as unknown as BlogPost[]) ?? [])
 <script is:inline data-astro-rerun define:vars={{ posts }}>
 	const dates = document.querySelectorAll('.blog-list__post__footer__date');
 	dates.forEach(date => {
+		if (!date.getAttribute('data-date')) return;
 		date.innerHTML = window.relativeTime(date.getAttribute('data-date'));
 	});
 
@@ -50,7 +55,7 @@ const posts = ((data as unknown as BlogPost[]) ?? [])
 	  color: var(--text-color);
 	}
 
-	.blog-list__wrapper time {
+	.blog-list__wrapper .blog-list__post__footer__date {
 	  font-size: .85em;
 	  color: var(--color-text-secondary);
 	}

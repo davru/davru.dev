@@ -1,10 +1,10 @@
 [
   {
-    "slug": "maximizing-typescript-with-5-tips",
-    "date": "2024-10-30T18:00:00.140Z",
-    "tags": ["TypeScript"],
-    "summary": "Discover 5 powerful TypeScript tips to improve your code. Learn how to use key utility types like Partial and Omit, optimize type inference, enforce immutability with as const, implement type guards, and leverage conditional types with extend.",
-    "title": "🚀 Maximizing TypeScript: 5 tips to unlock its full potential",
+    "slug": "crafting-my-home-server",
+    "date": null,
+    "tags": ["Home server", "Cloud", "Proxmox"],
+    "summary": null,
+    "title": "🏠 Crafting my home server: A journey into Proxmox and VMs",
     "published": true
   },
   {
@@ -13,6 +13,14 @@
     "tags": ["CSS"],
     "summary": "Steer clear of these CSS pitfalls that cause maintainability nightmares and performance issues.",
     "title": "10 CSS practices you should never follow: Common mistakes to avoid",
+    "published": true
+  },
+  {
+    "slug": "maximizing-typescript-with-5-tips",
+    "date": "2024-10-30T18:00:00.140Z",
+    "tags": ["TypeScript"],
+    "summary": "Discover 5 powerful TypeScript tips to improve your code. Learn how to use key utility types like Partial and Omit, optimize type inference, enforce immutability with as const, implement type guards, and leverage conditional types with extend.",
+    "title": "🚀 Maximizing TypeScript: 5 tips to unlock its full potential",
     "published": true
   }
 ]
