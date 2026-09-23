@@ -17,7 +17,7 @@ const meta = buildPostMeta(post);
 
 <Layout title={`${post?.title} - David (davru) Sanchez`} description={post?.summary ?? ''} meta={meta}>
 	<div class="blog-post__wrapper">
-    <article *ngIf="post; else error">
+    <article>
       <header>
         <h1 class="blog-post__title" transition:name={post.slug}>{ post?.title }</h1>
 

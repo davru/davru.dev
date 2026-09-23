@@ -6,7 +6,7 @@ interface Props {
 const { tags } = Astro.props;
 ---
 
-<div class="tag-list__container" [ngStyle]="style">
+<div class="tag-list__container">
   {(tags ?? []).map((tag: string) => (
   	<span class="tag">{ tag }<span class="tag__background"></span></span>
   ))}
