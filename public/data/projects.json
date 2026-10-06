@@ -1,0 +1,83 @@
+[
+  {
+    "slug": "is-vibe-coded",
+    "name": "Is this repo vibe coded?",
+    "year": 2025,
+    "type": "web",
+    "role": "Full-stack + diseño",
+    "summary": "A web application that uses heuristic patterns to analyze GitHub repositories and determine if they are 'vibe coded' based on their code quality, structure, and documentation.",
+    "cover": "/images/work/isvibecoded.webp",
+    "tags": ["React", "Python", "AI"],
+    "url": "https://isvibecoded.com",
+    "abandoned": false
+  },
+  {
+    "slug": "shar3",
+    "name": "Shar3",
+    "year": 2024,
+    "type": "web",
+    "role": "Full-stack",
+    "summary": "Desktop app for easily sharing your folders and files temporarily with a QR code or url. Works inside and outside of your local network!",
+    "cover": "/images/work/shar3.webp",
+    "tags": ["React", "Electron", "Express"],
+    "url": "https://github.com/davru/shar3-app",
+    "abandoned": true
+  },
+  {
+    "slug": "spotifyrics",
+    "name": "Spotifyrics",
+    "year": 2024,
+    "type": "web",
+    "role": "Full-stack",
+    "summary": "A small desktop app developed with React and Electron, allowing you to control your Spotify client and display real-time lyrics depending on the song you are listening to without logging in.",
+    "cover": "/images/work/spotifyrics.webp",
+    "tags": ["React", "Electron", "TypeScript", "Webpack", "Genius API"],
+    "url": "https://spotifyrics.davru.dev/",
+    "abandoned": true
+  },
+  {
+    "slug": "fastchat",
+    "name": "FastChat",
+    "year": 2023,
+    "type": "web",
+    "role": "Full-stack",
+    "summary": "An easy and fast solution to avoid needing to add contacts before writing to them through WhatsApp. You are able to install the tool as an app (PWA) in your mobile devices.",
+    "cover": "/images/work/fastchat.webp",
+    "tags": ["React", "PWA", "Vite"],
+    "url": "https://fastchat.davru.dev",
+    "abandoned": false
+  },
+  {
+    "slug": "placeholder-poster-series",
+    "name": "Pieza de diseño 01 — reemplazar",
+    "year": 2025,
+    "type": "design",
+    "role": "Dirección de arte",
+    "summary": "Entrada de ejemplo para probar el filtro de diseño. Sustituye esto por una pieza real, con su portada y su galería.",
+    "cover": "/images/work/placeholder.webp",
+    "tags": ["Poster", "Ilustración"],
+    "gallery": []
+  },
+  {
+    "slug": "placeholder-brand",
+    "name": "Pieza de diseño 02 — reemplazar",
+    "year": 2025,
+    "type": "design",
+    "role": "Identidad visual",
+    "summary": "Entrada de ejemplo para probar el filtro de diseño. Sustituye esto por una pieza real, con su portada y su galería.",
+    "cover": "/images/work/placeholder.webp",
+    "tags": ["Branding", "Tipografía"],
+    "gallery": []
+  },
+  {
+    "slug": "placeholder-editorial",
+    "name": "Pieza de diseño 03 — reemplazar",
+    "year": 2024,
+    "type": "design",
+    "role": "Diseño editorial",
+    "summary": "Entrada de ejemplo para probar el filtro de diseño. Sustituye esto por una pieza real, con su portada y su galería.",
+    "cover": "/images/work/placeholder.webp",
+    "tags": ["Editorial", "Maquetación"],
+    "gallery": []
+  }
+]

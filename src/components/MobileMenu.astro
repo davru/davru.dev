@@ -14,8 +14,7 @@ const path = new URL(url).pathname
 	</div>
 	<ol class="mobile-nav__links">
 		<li><span>1.</span><a class:list={[{ active: path == '/' }]} href="/">home</a></li>
-		<li><span>2.</span><a class:list={[{ active: path == '/work/' }]} href="/work">work</a></li>
-		<li><span>3.</span><a class:list={[{ active: path == '/blog/' }]} href="/blog">blog</a></li>
+		<li><span>2.</span><a class:list={[{ active: path.startsWith('/work') }]} href="/work">work</a></li>
 	</ol>
 
 	<div id="mobile-nav__close">
@@ -27,28 +26,41 @@ const path = new URL(url).pathname
 </nav>
 
 <script is:inline defer data-astro-rerun>
-	const nav = document.getElementById('nav');
-	const mobileNav = document.getElementById('mobile-nav');
-	const mobileNavClose = document.getElementById('mobile-nav__close');
+	// Wrapped in an IIFE: ClientRouter re-executes every `data-astro-rerun` script
+	// by cloning it into the same global scope, so top-level `const` would throw
+	// "Identifier 'nav' has already been declared" on the second page.
+	(() => {
+		const nav = document.getElementById('nav');
+		const mobileNav = document.getElementById('mobile-nav');
+		const mobileNavClose = document.getElementById('mobile-nav__close');
 
-	mobileNav.addEventListener('click', (event) => {
-		console.log('open')
-		document.documentElement.style.overflowY = 'hidden';
-		mobileNav.classList.add('active');
-		nav.classList.add('mobile');
-		event.stopPropagation();
-	});
+		if (!nav || !mobileNav || !mobileNavClose) return;
 
-	mobileNavClose.addEventListener('click', (event) => {
-		document.documentElement.style.overflowY = 'auto';
-		mobileNav.classList.remove('active');
-	  nav.classList.add('transitioning');
-	  setTimeout(() => {
-	    nav.classList.remove('transitioning');
-			nav.classList.remove('mobile');
-	  }, 700);
-		event.stopPropagation();
-	});
+		mobileNav.addEventListener('click', (event) => {
+			document.documentElement.style.overflowY = 'hidden';
+			mobileNav.classList.add('active');
+			nav.classList.add('mobile');
+			event.stopPropagation();
+		});
+
+		mobileNavClose.addEventListener('click', (event) => {
+			document.documentElement.style.overflowY = 'auto';
+			mobileNav.classList.remove('active');
+			nav.classList.add('transitioning');
+			setTimeout(() => {
+				nav.classList.remove('transitioning');
+				nav.classList.remove('mobile');
+			}, 700);
+			event.stopPropagation();
+		});
+
+		// ClientRouter swaps only <body>: an inline style left on <html> survives the
+		// navigation. Tapping a menu link while the menu is open would otherwise leave
+		// the next page with overflow-y: hidden and no menu left to close it.
+		document.addEventListener('astro:after-swap', () => {
+			document.documentElement.style.removeProperty('overflow-y');
+		});
+	})();
 </script>
 
 <style>

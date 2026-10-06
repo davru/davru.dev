@@ -1,2 +1,2 @@
-export * from './blog';
 export * from './meta';
+export * from './project';

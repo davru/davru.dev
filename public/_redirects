@@ -1,0 +1,3 @@
+# The blog section was removed — keep any indexed or shared /blog links alive.
+/blog/*  /work  301
+/blog     /work  301
